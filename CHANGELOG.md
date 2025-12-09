@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/Zelelo622/table-game-React/compare/v1.0.0...v1.1.0) (2025-12-09)
+
+
+### Features
+
+* started home page collection ([c6af7e1](https://github.com/Zelelo622/table-game-React/commit/c6af7e1fd5f460b93ad674137c94da183cdaefd4))
+
 # 1.0.0 (2025-12-09)
 
 
