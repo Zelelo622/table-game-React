@@ -7,7 +7,7 @@ import { useDebounce } from "src/hooks/useDebounce";
 
 const GameList = (): ReactElement => {
   const [searchTerm, setSearchTerm] = useState("");
-  const debouncedTerm = useDebounce(searchTerm, 300);
+  const debouncedTerm = useDebounce(searchTerm, 400);
 
   const filteredGames = gamesList.games.filter((game) =>
     game.title.toLowerCase().includes(debouncedTerm.trim().toLowerCase())

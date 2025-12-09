@@ -1,6 +1,7 @@
 export interface IGameData {
   id: string | number;
   title: string;
+  description: string;
   image: string;
   rating: number;
   players: string;

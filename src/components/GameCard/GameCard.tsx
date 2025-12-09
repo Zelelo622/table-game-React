@@ -2,7 +2,11 @@ import { Clock, Star, Users } from "lucide-react";
 import { ReactElement } from "react";
 import { IGameData } from "src/types/types";
 
-const GameCard = ({ game }: { game: IGameData }): ReactElement => {
+const GameCard = ({
+  game
+}: {
+  game: Omit<IGameData, "description">;
+}): ReactElement => {
   return (
     <div className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-gray-700 group cursor-pointer flex flex-col">
       <div className="relative h-60 overflow-hidden">
