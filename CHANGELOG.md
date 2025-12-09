@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/Zelelo622/table-game-React/compare/v1.1.0...v1.2.0) (2025-12-09)
+
+
+### Features
+
+* added SearchBar for game list ([97b3c19](https://github.com/Zelelo622/table-game-React/commit/97b3c19f097800533ba8ef9102d7fcd9a1fe0d28))
+
 # [1.1.0](https://github.com/Zelelo622/table-game-React/compare/v1.0.0...v1.1.0) (2025-12-09)
 
 
