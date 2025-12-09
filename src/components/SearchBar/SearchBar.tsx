@@ -14,7 +14,7 @@ const SearchBar = ({
         value={searchTerm}
         onChange={(e) => onSearchChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full bg-gray-800 border border-gray-700 rounded-lg py-[8px] pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors 
+        className="w-full bg-gray-800 border border-gray-700 rounded-lg py-2 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors 
                    placeholder:text-gray-500 text-lg"
       />
 
