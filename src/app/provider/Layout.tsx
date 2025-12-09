@@ -15,10 +15,10 @@ const Layout = (): ReactElement => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-900">
+    <div className="h-screen flex flex-col bg-gray-900 overflow-hidden">
       <Header />
 
-      <main className="flex-1 w-full">
+      <main className="flex-1 w-full p-8 text-white overflow-y-auto">
         <Outlet />
       </main>
     </div>
