@@ -6,8 +6,12 @@ import {
   createRoute,
   createRouter
 } from "@tanstack/react-router";
+import { ROUTES } from "./routes";
 
 const HomePage = lazy(() => import("src/pages/Home/HomePage"));
+const GameDetailsPage = lazy(
+  () => import("src/pages/GameDetailsPage/GameDetailsPage")
+);
 const SessionPage = lazy(() => import("src/pages/SessionsPage/SessionsPage"));
 const SpinnerPage = lazy(
   () => import("src/pages/RandomGamePage/RandomGamePage")
@@ -26,7 +30,7 @@ export const rootRoute = createRootRoute({
 
 const homeRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/",
+  path: ROUTES.HOME,
   component: () => (
     <Suspense fallback={<Spinner />}>
       <HomePage />
@@ -34,9 +38,19 @@ const homeRoute = createRoute({
   )
 });
 
+const gameDetailRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: ROUTES.GAME_DETAILS,
+  component: () => (
+    <Suspense fallback={<Spinner />}>
+      <GameDetailsPage />
+    </Suspense>
+  )
+});
+
 const sessionsRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/sessions",
+  path: ROUTES.SESSIONS,
   component: () => (
     <Suspense fallback={<Spinner />}>
       <SessionPage />
@@ -46,7 +60,7 @@ const sessionsRoute = createRoute({
 
 const wishlistRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/wishlist",
+  path: ROUTES.WISHLIST,
   component: () => (
     <Suspense fallback={<Spinner />}>
       <WishlistPage />
@@ -56,7 +70,7 @@ const wishlistRoute = createRoute({
 
 const randomGameRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/random-game",
+  path: ROUTES.RANDOM_GAME,
   component: () => (
     <Suspense fallback={<Spinner />}>
       <SpinnerPage />
@@ -68,7 +82,8 @@ const routeTree = rootRoute.addChildren([
   homeRoute,
   sessionsRoute,
   wishlistRoute,
-  randomGameRoute
+  randomGameRoute,
+  gameDetailRoute
 ]);
 
 export const router = createRouter({ routeTree });

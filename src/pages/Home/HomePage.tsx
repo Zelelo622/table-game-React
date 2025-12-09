@@ -3,7 +3,7 @@ import GameList from "src/components/GameList/GameList";
 
 const HomePage = (): ReactElement => {
   return (
-    <div className="font-sans h-full flex flex-col gap-6">
+    <div className="h-full flex flex-col gap-6">
       <GameList />
     </div>
   );

@@ -18,7 +18,7 @@ const Layout = (): ReactElement => {
     <div className="h-screen flex flex-col bg-gray-900 overflow-hidden">
       <Header />
 
-      <main className="flex-1 w-full p-8 text-white overflow-y-auto">
+      <main className="flex-1 w-full p-8 text-white overflow-y-auto font-sans">
         <Outlet />
       </main>
     </div>

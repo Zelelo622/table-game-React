@@ -1,5 +1,7 @@
+import { Link } from "@tanstack/react-router";
 import { Clock, Star, Users } from "lucide-react";
 import { ReactElement } from "react";
+import { ROUTES } from "src/app/routes/routes";
 import { IGameData } from "src/types/types";
 
 const GameCard = ({
@@ -8,7 +10,10 @@ const GameCard = ({
   game: Omit<IGameData, "description">;
 }): ReactElement => {
   return (
-    <div className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-gray-700 group cursor-pointer flex flex-col">
+    <Link
+      to={ROUTES.GAME_DETAILS}
+      params={{ gameId: String(game.id) }}
+      className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-gray-700 group cursor-pointer flex flex-col">
       <div className="relative h-60 overflow-hidden">
         <img
           src={game.image}
@@ -48,7 +53,7 @@ const GameCard = ({
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

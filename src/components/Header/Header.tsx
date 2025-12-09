@@ -1,13 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { ReactElement } from "react";
 import { Dice5, LayoutGrid, Calendar, Heart, Dices } from "lucide-react";
+import { ROUTES } from "src/app/routes/routes";
 
 const Header = (): ReactElement => {
   return (
     <header className="bg-gray-800 border-b border-gray-700 sticky top-0 z-50">
       <div className="flex h-16 items-center justify-between px-8 w-full">
         <Link
-          to="/"
+          to={ROUTES.HOME}
           className="flex items-center gap-2 text-xl font-bold text-white hover:text-blue-400 transition-colors">
           <Dice5 className="text-blue-500" size={28} />
           <span>BoardGeek</span>
@@ -15,28 +16,28 @@ const Header = (): ReactElement => {
 
         <nav className="flex items-center gap-6">
           <Link
-            to="/"
+            to={ROUTES.HOME}
             className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors [&.active]:text-blue-400">
             <LayoutGrid size={18} />
             <span className="hidden sm:inline">Коллекция</span>
           </Link>
 
           <Link
-            to="/sessions"
+            to={ROUTES.SESSIONS}
             className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors [&.active]:text-blue-400">
             <Calendar size={18} />
             <span className="hidden sm:inline">Партии</span>
           </Link>
 
           <Link
-            to="/wishlist"
+            to={ROUTES.WISHLIST}
             className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors [&.active]:text-blue-400">
             <Heart size={18} />
             <span className="hidden sm:inline">Хотелки</span>
           </Link>
 
           <Link
-            to="/random-game"
+            to={ROUTES.RANDOM_GAME}
             className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors [&.active]:text-blue-400">
             <Dices size={18} />
             <span className="hidden sm:inline">Колесо Выбора</span>
