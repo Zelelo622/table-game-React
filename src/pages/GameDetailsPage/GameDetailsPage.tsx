@@ -27,7 +27,7 @@ const GameDetailsPage = (): ReactElement => {
   }
 
   return (
-    <div className="h-full">
+    <div className="h-auto mt-5">
       <Link
         to={ROUTES.HOME}
         className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors mb-6 text-lg">

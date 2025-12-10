@@ -48,5 +48,5 @@ export const gamesList: IGamesList = {
   games: mockGameData,
   total: mockGameData.length,
   page: 1,
-  pageSize: mockGameData.length
+  pageSize: 10
 };

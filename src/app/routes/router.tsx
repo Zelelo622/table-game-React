@@ -86,4 +86,7 @@ const routeTree = rootRoute.addChildren([
   gameDetailRoute
 ]);
 
-export const router = createRouter({ routeTree });
+export const router = createRouter({
+  routeTree,
+  scrollRestoration: true // <-- Включаем автоматическое управление скроллом
+});
