@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Clock, Star, Users } from "lucide-react";
 import { ReactElement } from "react";
 import { ROUTES } from "src/app/routes/routes";
-import { IGameData } from "src/types/types";
+import { IGameData } from "src/shared/types/types";
 
 const GameCard = ({
   game
