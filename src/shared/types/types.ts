@@ -15,3 +15,12 @@ export interface IGamesList {
   page: number;
   pageSize: number;
 }
+
+export interface ISession {
+  id: number;
+  gameId: number;
+  date: string;
+  players: string[];
+  notes?: string;
+  winner?: string;
+}

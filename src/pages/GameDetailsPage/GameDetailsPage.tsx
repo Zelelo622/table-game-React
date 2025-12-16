@@ -76,11 +76,11 @@ const GameDetailsPage = (): ReactElement => {
               {game.description}
             </p>
 
-            <div className="space-y-4">
-              <button className="cursor-pointer w-full text-center bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-lg transition-colors">
-                Записать партию
-              </button>
-            </div>
+            <Link
+              to="/sessions"
+              className="block w-full text-center bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-lg transition-colors shadow-lg">
+              Записать партию
+            </Link>
           </div>
         </div>
       </div>

@@ -88,5 +88,5 @@ const routeTree = rootRoute.addChildren([
 
 export const router = createRouter({
   routeTree,
-  scrollRestoration: true // <-- Включаем автоматическое управление скроллом
+  scrollRestoration: true
 });
