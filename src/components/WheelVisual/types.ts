@@ -5,4 +5,5 @@ export interface IWheelVisualProps {
   background: string;
   duration: number;
   items: Pick<IGameData, "id" | "title">[];
+  showLabels: boolean;
 }

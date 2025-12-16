@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useSearch } from "@tanstack/react-router";
 import { Clock, Star, Users } from "lucide-react";
 import { ReactElement } from "react";
 import { ROUTES } from "src/app/routes/routes";
@@ -9,10 +9,18 @@ const GameCard = ({
 }: {
   game: Omit<IGameData, "description">;
 }): ReactElement => {
+  const { page: currentPage, search: searchTerm } = useSearch({
+    from: "/"
+  });
+
   return (
     <Link
       to={ROUTES.GAME_DETAILS}
       params={{ gameId: String(game.id) }}
+      search={{
+        fromPage: currentPage,
+        fromSearch: searchTerm
+      }}
       className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-gray-700 group cursor-pointer flex flex-col">
       <div className="relative h-60 overflow-hidden">
         <img

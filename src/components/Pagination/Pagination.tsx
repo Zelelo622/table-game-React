@@ -17,7 +17,7 @@ const Pagination = ({
       <button
         disabled={currentPage === 1}
         onClick={() => onChange(currentPage - 1)}
-        className="rounded-lg hover:bg-gray-700 disabled:opacity-30 transition
+        className="cursor-pointer rounded-lg hover:bg-gray-700 disabled:opacity-30 transition
                    md:p-2 p-1">
         <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
       </button>
@@ -28,6 +28,7 @@ const Pagination = ({
             key={item}
             onClick={() => onChange(Number(item))}
             className={`
+              cursor-pointer
               rounded-lg transition
               md:px-3 md:py-1 px-2 py-1
               md:text-base text-sm
@@ -45,7 +46,7 @@ const Pagination = ({
       <button
         disabled={currentPage === totalPages}
         onClick={() => onChange(currentPage + 1)}
-        className="rounded-lg hover:bg-gray-700 disabled:opacity-30 transition
+        className="cursor-pointer rounded-lg hover:bg-gray-700 disabled:opacity-30 transition
                    md:p-2 p-1">
         <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
       </button>

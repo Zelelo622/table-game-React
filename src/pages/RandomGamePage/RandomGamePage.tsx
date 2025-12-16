@@ -1,22 +1,30 @@
-import { ReactElement, useState, useMemo } from "react";
-import { gamesList } from "src/mocks/gamesList";
+import { ReactElement, useState, useMemo, useEffect } from "react";
 import { Dices, Sparkles } from "lucide-react";
 import GameCard from "src/components/GameCard/GameCard";
+import { WheelVisual } from "src/components/WheelVisual/WheelVisual";
+import { useAppSelector, useAppDispatch } from "src/store/hooks";
+import { fetchGames } from "src/store/slices/gameSlice";
 import {
   getWheelBackground,
   getWinnerIndex
 } from "src/shared/utils/wheelUtils";
-import { WheelVisual } from "src/components/WheelVisual/WheelVisual";
 import { IGameData } from "src/shared/types/types";
 
 const SPIN_DURATION_MS = 4000;
 
 const RandomGamePage = (): ReactElement => {
+  const dispatch = useAppDispatch();
+  const { games, loading } = useAppSelector((state) => state.game);
+
   const [isSpinning, setIsSpinning] = useState(false);
   const [rotation, setRotation] = useState(0);
   const [winner, setWinner] = useState<IGameData | null>(null);
 
-  const games = gamesList.games;
+  useEffect(() => {
+    if (games.length === 0) {
+      dispatch(fetchGames());
+    }
+  }, [dispatch, games.length]);
 
   const wheelBackground = useMemo(
     () => getWheelBackground(games.length),
@@ -59,25 +67,32 @@ const RandomGamePage = (): ReactElement => {
         <p className="text-gray-400">Игр в рулетке: {games.length}</p>
       </div>
 
-      <WheelVisual
-        rotation={rotation}
-        background={wheelBackground}
-        duration={SPIN_DURATION_MS}
-        items={games}
-      />
+      {loading && <p className="text-gray-400 mt-2">Загрузка игр...</p>}
 
-      <button
-        onClick={handleSpin}
-        disabled={isSpinning || games.length === 0}
-        className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 disabled:bg-gray-700 disabled:cursor-not-allowed text-white px-8 py-3 rounded-xl font-bold text-lg shadow-lg transition-transform active:scale-95">
-        {isSpinning ? (
-          "Крутим..."
-        ) : (
-          <>
-            <Sparkles size={20} /> Испытать удачу
-          </>
-        )}
-      </button>
+      {!loading && games.length > 0 && (
+        <>
+          <WheelVisual
+            rotation={rotation}
+            background={wheelBackground}
+            duration={SPIN_DURATION_MS}
+            items={games}
+            showLabels={games.length <= 10}
+          />
+
+          <button
+            onClick={handleSpin}
+            disabled={isSpinning || games.length === 0}
+            className="cursor-pointer flex items-center gap-2 bg-blue-600 hover:bg-blue-500 disabled:bg-gray-700 disabled:cursor-not-allowed text-white px-8 py-3 rounded-xl font-bold text-lg shadow-lg transition-transform active:scale-95">
+            {isSpinning ? (
+              "Крутим..."
+            ) : (
+              <>
+                <Sparkles size={20} /> Испытать удачу
+              </>
+            )}
+          </button>
+        </>
+      )}
 
       {winner && !isSpinning && (
         <div className="mt-4 animate-in fade-in slide-in-from-bottom-4 duration-500 text-center">
@@ -88,6 +103,10 @@ const RandomGamePage = (): ReactElement => {
             <GameCard game={winner} />
           </div>
         </div>
+      )}
+
+      {!loading && games.length === 0 && (
+        <p className="text-gray-400 mt-4">Список игр пуст.</p>
       )}
     </div>
   );

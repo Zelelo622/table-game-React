@@ -1,35 +1,61 @@
-import { Link, useParams } from "@tanstack/react-router";
+import { Link, useParams, useSearch } from "@tanstack/react-router";
 import { ArrowLeft, Clock, Star, Users } from "lucide-react";
-import { ReactElement, useMemo } from "react";
+import { ReactElement, useEffect } from "react";
 import { ROUTES } from "src/app/routes/routes";
-import { gamesList } from "src/mocks/gamesList";
 import { DetailStat } from "./components/DetailStat";
+import { useAppDispatch, useAppSelector } from "src/store/hooks";
+import { fetchGameDetails } from "src/store/slices/gameSlice";
+import Skeleton from "src/components/Skeleton/Skeleton";
 
 const GameDetailsPage = (): ReactElement => {
   const { gameId } = useParams({ strict: false });
+  const dispatch = useAppDispatch();
+  const { selectedGame, loading } = useAppSelector((state) => state.game);
 
-  const game = useMemo(() => {
-    const idToFind = Number(gameId);
-    return gamesList.games.find((g) => g.id === idToFind);
-  }, [gameId]);
+  const searchParams = useSearch({
+    strict: false
+  });
 
-  if (!game) {
+  const fromPage = searchParams?.fromPage || 1;
+  const fromSearch = searchParams?.fromSearch || "";
+
+  useEffect(() => {
+    if (gameId) dispatch(fetchGameDetails(gameId));
+  }, [dispatch, gameId]);
+
+  if (loading)
+    return (
+      <div className="h-auto py-8 px-4">
+        <Skeleton height="300px" />
+      </div>
+    );
+
+  if (!selectedGame)
     return (
       <div className="p-12 text-center text-white">
         <h1 className="text-3xl font-bold mb-4">Игра не найдена</h1>
         <Link
           to={ROUTES.HOME}
+          search={{
+            page: fromPage,
+            search: fromSearch
+          }}
           className="mt-6 flex items-center justify-center gap-2 mx-auto text-blue-400 cursor-pointer hover:text-blue-300 transition-colors">
           <ArrowLeft size={20} /> Вернуться
         </Link>
       </div>
     );
-  }
+
+  const game = selectedGame;
 
   return (
-    <div className="h-auto mt-5">
+    <div className="h-auto py-8 px-4">
       <Link
         to={ROUTES.HOME}
+        search={{
+          page: fromPage,
+          search: fromSearch
+        }}
         className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors mb-6 text-lg">
         <ArrowLeft size={20} />
         Назад в коллекцию

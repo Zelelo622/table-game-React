@@ -18,7 +18,7 @@ const Skeleton = ({
 
   return (
     <div
-      className={`bg-gray-200 animate-pulse ${roundedClass} ${className}`}
+      className={`bg-gray-500 animate-pulse ${roundedClass} ${className}`}
       style={{ width, height }}
     />
   );

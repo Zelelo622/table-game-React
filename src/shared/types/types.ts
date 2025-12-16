@@ -1,5 +1,5 @@
 export interface IGameData {
-  id: string | number;
+  id: string;
   title: string;
   description: string;
   image: string;

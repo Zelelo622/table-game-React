@@ -5,11 +5,14 @@ export const WheelVisual = ({
   rotation,
   background,
   duration,
-  items
+  items,
+  showLabels = true
 }: IWheelVisualProps): ReactElement => {
   const sliceSize = 360 / items.length;
 
   const renderItems = () => {
+    if (!showLabels) return null;
+
     return items.map((item, index) => {
       const rotate = index * sliceSize + sliceSize / 2;
 

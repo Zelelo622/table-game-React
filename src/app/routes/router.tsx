@@ -35,7 +35,18 @@ const homeRoute = createRoute({
     <Suspense fallback={<Spinner />}>
       <HomePage />
     </Suspense>
-  )
+  ),
+  validateSearch: (
+    search: Record<string, unknown>
+  ): { page: number; search: string } => {
+    const page = Number(search.page ?? 1);
+    const searchString = (search.search as string) ?? "";
+
+    return {
+      page: isNaN(page) || page < 1 ? 1 : page,
+      search: searchString
+    };
+  }
 });
 
 const gameDetailRoute = createRoute({
