@@ -33,7 +33,6 @@ const RandomGamePage = (): ReactElement => {
     const randomSector = Math.floor(Math.random() * games.length);
     const randomOffset = Math.random() * (sliceSize * 0.8) + sliceSize * 0.1;
 
-    // Расчет целевого угла
     const targetRotation =
       rotation +
       360 * 5 +
@@ -51,8 +50,7 @@ const RandomGamePage = (): ReactElement => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-8 py-8 px-4 min-h-screen">
-      {/* Заголовок */}
+    <div className="flex flex-col items-center gap-8 py-8 px-4">
       <div className="text-center">
         <h1 className="text-3xl font-bold text-white flex justify-center gap-3 mb-2">
           <Dices className="text-blue-500" size={32} />
@@ -61,14 +59,13 @@ const RandomGamePage = (): ReactElement => {
         <p className="text-gray-400">Игр в рулетке: {games.length}</p>
       </div>
 
-      {/* Блок с колесом: Используем отдельный компонент */}
       <WheelVisual
         rotation={rotation}
         background={wheelBackground}
         duration={SPIN_DURATION_MS}
+        items={games}
       />
 
-      {/* Кнопка запуска */}
       <button
         onClick={handleSpin}
         disabled={isSpinning || games.length === 0}
@@ -82,7 +79,6 @@ const RandomGamePage = (): ReactElement => {
         )}
       </button>
 
-      {/* Результат */}
       {winner && !isSpinning && (
         <div className="mt-4 animate-in fade-in slide-in-from-bottom-4 duration-500 text-center">
           <h2 className="text-2xl font-bold text-white mb-4">
