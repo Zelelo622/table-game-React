@@ -1,20 +1,26 @@
-import { ReactElement, useState } from "react";
-import { sessionsList as initialSessions } from "src/mocks/sessionsList";
+import { ReactElement, useMemo, useState } from "react";
 import { SessionCard } from "src/components/SessionCard/SessionCard";
 import { AddSessionModal } from "src/components/AddSessionModal/AddSessionModal";
 import { ClipboardList, Plus } from "lucide-react";
 import { ISession } from "src/shared/types/types";
+import { useAppDispatch, useAppSelector } from "src/store/hooks";
+import { addSession } from "src/store/slices/sessionSlice";
 
 const SessionsPage = (): ReactElement => {
-  const [sessions, setSessions] = useState<ISession[]>(initialSessions);
+  const sessions = useAppSelector((state) => state.session.sessions);
+  const dispatch = useAppDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const sortedSessions = [...sessions].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  const sortedSessions = useMemo(
+    () =>
+      [...sessions].sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+      ),
+    [sessions]
   );
 
   const handleSaveSession = (newSession: ISession) => {
-    setSessions((prev) => [newSession, ...prev]);
+    dispatch(addSession(newSession));
     setIsModalOpen(false);
   };
 

@@ -1,26 +1,28 @@
 import { ReactElement, useState } from "react";
-import { gamesList } from "src/mocks/gamesList";
 import GameCard from "../GameCard/GameCard";
 import { Plus } from "lucide-react";
 import SearchBar from "../SearchBar/SearchBar";
 import { useDebounce } from "src/shared/hooks/useDebounce";
 import Pagination from "../Pagination/Pagination";
+import { useAppSelector } from "src/store/hooks";
 
 const GameList = (): ReactElement => {
+  const allGames = useAppSelector((state) => state.game.games);
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
 
   const debouncedTerm = useDebounce(searchTerm, 400);
 
-  const filteredGames = gamesList.games.filter((game) =>
+  const filteredGames = allGames.filter((game) =>
     game.title.toLowerCase().includes(debouncedTerm.trim().toLowerCase())
   );
 
-  const totalPages = Math.ceil(filteredGames.length / gamesList.pageSize);
+  const PAGE_SIZE = 10;
+  const totalPages = Math.ceil(filteredGames.length / PAGE_SIZE);
 
   const paginated = filteredGames.slice(
-    (page - 1) * gamesList.pageSize,
-    page * gamesList.pageSize
+    (page - 1) * PAGE_SIZE,
+    page * PAGE_SIZE
   );
 
   const onSearchChange = (value: string) => {
